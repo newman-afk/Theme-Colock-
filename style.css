@@ -113,6 +113,9 @@ body {
   height: 100px;
   background-color: #e74c3c;
 }
+.needle.second.test {
+  transition: all 0.5s ease-in;
+}
 .needle.second.run {
   animation-name: second;
   animation-duration: 0.5s;

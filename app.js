@@ -86,7 +86,7 @@ function setTime() {
   minuteStart = minuteDeg;
 
   secondEl.classList.remove("run");
-  secondEl.offsetHeight;
+  secondEl.offsetLeft;
   document.documentElement.style.setProperty("--second-start", secondStart);
   document.documentElement.style.setProperty("--second-end", secondDeg);
   if (!seconds) {
@@ -94,6 +94,27 @@ function setTime() {
   }
   secondEl.classList.add("run");
   secondStart = secondDeg;
+  // if (seconds) {
+  //   secondEl.classList.add("test");
+  //   secondEl.style.transform = `translate(-50%, -100%) rotate(${`${scale(
+  //     seconds,
+  //     0,
+  //     59,
+  //     0,
+  //     354
+  //   )}deg`})`;
+  // } else {
+  //   secondEl.classList.remove("test");
+  //   secondEl.style.transform = `translate(-50%, -100%) rotate(-6deg)`;
+  //   setTimeout(() => {
+  //     secondEl.style.transition = `transform 0.5s ease-in`;
+  //     secondEl.style.transform = `translate(-50%, -100%) rotate(0deg)`;
+  //   }, 0);
+
+  //   setTimeout(() => {
+  //     secondEl.style.transition = ``;
+  //   }, 500);
+  // }
 
   timeEl.innerHTML = `${hoursForClock}:${
     minutes < 10 ? `0${minutes}` : minutes
