@@ -40,6 +40,10 @@ toggle.addEventListener("click", (e) => {
   }
 });
 
+let hourStart = "0deg";
+let minuteStart = "0deg";
+let secondStart = "0deg";
+let firstTime = true;
 function setTime() {
   const time = new Date();
   const month = time.getMonth();
@@ -51,27 +55,45 @@ function setTime() {
   const seconds = time.getSeconds();
   const ampm = hours >= 12 ? "PM" : "AM";
 
-  hourEl.style.transform = `translate(-50%, -100%) rotate(${scale(
-    hoursForClock,
-    0,
-    11,
-    0,
-    330
-  )}deg)`;
-  minuteEl.style.transform = `translate(-50%, -100%) rotate(${scale(
-    minutes,
-    0,
-    59,
-    0,
-    354
-  )}deg)`;
-  secondEl.style.transform = `translate(-50%, -100%) rotate(${scale(
-    seconds,
-    0,
-    59,
-    0,
-    354
-  )}deg)`;
+  const hourDeg = `${scale(hoursForClock, 0, 11, 0, 330)}deg`;
+  const minuteDeg = `${scale(minutes, 0, 59, 0, 354)}deg`;
+  const secondDeg = `${scale(seconds, 0, 59, 0, 354)}deg`;
+  if (firstTime) {
+    hourStart = hourDeg;
+    minuteStart = minuteDeg;
+    secondStart = secondDeg;
+    firstTime = false;
+  }
+  hourEl.classList.remove("run");
+  hourEl.offsetHeight;
+  document.documentElement.style.setProperty("--hour-start", hourStart);
+  document.documentElement.style.setProperty("--hour-end", hourDeg);
+  if (!hours && hourStart !== hourDeg) {
+    document.documentElement.style.setProperty("--hour-start", "-30deg");
+  }
+  hourEl.classList.add("run");
+  hourStart = hourDeg;
+
+  minuteEl.classList.remove("run");
+  minuteEl.offsetHeight;
+  console.log(minuteStart);
+  document.documentElement.style.setProperty("--minute-start", minuteStart);
+  document.documentElement.style.setProperty("--minute-end", minuteDeg);
+  if (!minutes && minuteStart !== minuteDeg) {
+    document.documentElement.style.setProperty("--minute-start", "-6deg");
+  }
+  minuteEl.classList.add("run");
+  minuteStart = minuteDeg;
+
+  secondEl.classList.remove("run");
+  secondEl.offsetHeight;
+  document.documentElement.style.setProperty("--second-start", secondStart);
+  document.documentElement.style.setProperty("--second-end", secondDeg);
+  if (!seconds) {
+    document.documentElement.style.setProperty("--second-start", "-6deg");
+  }
+  secondEl.classList.add("run");
+  secondStart = secondDeg;
 
   timeEl.innerHTML = `${hoursForClock}:${
     minutes < 10 ? `0${minutes}` : minutes

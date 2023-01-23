@@ -7,6 +7,13 @@
 :root {
   --primary-color: #000;
   --secondary-color: #fff;
+
+  --minute-end: 0deg;
+  --second-start: 0deg;
+  --second-end: 0deg;
+  --hour-start: 0deg;
+  --hour-end: 0deg;
+  --minute-start: 0deg;
 }
 
 html {
@@ -69,24 +76,57 @@ body {
   height: 65px;
   width: 3px;
   transform-origin: bottom center;
-  transition: all 0.5s ease-in forwards;
 }
-
 .needle.hour {
-  transform: translate(-50%, -100%) rotate(0deg);
+  transform: translate(-50%, -100%);
+}
+.needle.hour.run {
+  animation: hour 0.5s ease-in both;
+}
+@keyframes hour {
+  0% {
+    transform: translate(-50%, -100%) rotate(var(--hour-start));
+  }
+  100% {
+    transform: translate(-50%, -100%) rotate(var(--hour-end));
+  }
 }
 
 .needle.minute {
-  transform: translate(-50%, -100%) rotate(0deg);
   height: 100px;
+  transform: translate(-50%, -100%);
 }
-
+.needle.minute.run {
+  animation: minute 0.5s linear both;
+}
+@keyframes minute {
+  0% {
+    transform: translate(-50%, -100%) rotate(var(--minute-start));
+  }
+  100% {
+    transform: translate(-50%, -100%) rotate(var(--minute-end));
+  }
+}
 .needle.second {
-  transform: translate(-50%, -100%) rotate(0deg);
+  transform: translate(-50%, -100%);
+
   height: 100px;
   background-color: #e74c3c;
 }
-
+.needle.second.run {
+  animation-name: second;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-timing-function: ease-in;
+}
+@keyframes second {
+  0% {
+    transform: translate(-50%, -100%) rotate(var(--second-start));
+  }
+  100% {
+    transform: translate(-50%, -100%) rotate(var(--second-end));
+  }
+}
 .center-point {
   background-color: #e74c3c;
   width: 10px;
